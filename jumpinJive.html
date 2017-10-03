@@ -32,30 +32,29 @@
    </div>
    <script>
    //additional ingredients can be added and will automatically be reflected on page
-   const addIns = [{"name":"Whipped Cream", "price": 0.89}, {"name":"Cinnamon", "price": 0.25},
-                   {"name":"Chocolate sauce", "price": 0.59},{"name":"Amaretto", "price":1.50},
-                   {"name":"Irish whiskey", "price":1.75}, {"name":"Rum","price":3.50}];
-   const content = document.querySelector('#addInsId');
-   const clearButton = document.querySelector('#clearAll');
-   const totalDisplay = document.querySelector('#total');
+   const addIns = [{"name": "Whipped Cream", "price": 0.89}, {"name": "Cinnamon", "price": 0.25},
+                   {"name": "Chocolate sauce", "price": 0.59}, {"name": "Amaretto", "price": 1.50},
+                   {"name": "Irish whiskey", "price": 1.75}, {"name": "Rum","price": 3.50}];
+   const content = document.querySelector("#addInsId");
+   const clearButton = document.querySelector("#clearAll");
+   const totalDisplay = document.querySelector("#total");
    let total;
    //create content based off addIns object
-   for(x=0;x<addIns.length;x++){
+   for(x = 0;x<addIns.length;x++){
       content.innerHTML += `<li class="list-group-item itemName" data-key=0>${addIns[x].name}<span class="price">$${addIns[x].price.toFixed(2)}</span><span class="badge"></span></li>`;
    }
-   const itemName = document.querySelectorAll('.itemName');
+   const itemName = document.querySelectorAll(".itemName");
    function addToCount(e){
-      if(!e.target.matches('.itemName')) {return}; 
-      console.log(e.target.dataset.key)
+      if(!e.target.matches(".itemName")) {return;}
       const el = e.target;
       el.dataset.key = parseFloat(el.dataset.key) + 1;
       el.children[1].innerHTML = el.dataset.key;
       total = 2.00;
-      total = addTotal();
+      total = addTotal(total);
       totalDisplay.innerHTML = total.toFixed(2);
    }
    
-   function addTotal(){
+   function addTotal(total){
       for (i = 0;i<itemName.length;i++){
          if (itemName[i].dataset.key > 0){
             total += addIns[i].price * parseInt(itemName[i].dataset.key);
@@ -64,16 +63,16 @@
       return total;
    }
    
-   function clearAll(e){
+   function clearAll(){
       for (i = 0;i<itemName.length;i++){
          itemName[i].dataset.key = 0;
-         itemName[i].children[1].innerHTML = '';
+         itemName[i].children[1].innerHTML = "";
       }
-      totalDisplay.innerHTML = '2.00';
+      totalDisplay.innerHTML = "2.00";
    }
    
-   content.addEventListener('click',addToCount);
-   clearButton.addEventListener('click',clearAll);
+   content.addEventListener("click",addToCount);
+   clearButton.addEventListener("click",clearAll);
    </script>
 </body>
 </html>
